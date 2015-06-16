@@ -63,7 +63,7 @@ public class PlatzVerkaufsWerkzeug implements SubwerkzeugObserver
     @Override
     public void reagiereAufAenderung()
     {
-        //TODO        
+        fuehreBarzahlungDurch();       
     }
 
     /**
@@ -76,8 +76,8 @@ public class PlatzVerkaufsWerkzeug implements SubwerkzeugObserver
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                //TODO
-                fuehreBarzahlungDurch();
+            	int preis = _vorstellung.getPreisFuerPlaetze(_ui.getPlatzplan().getAusgewaehltePlaetze());
+                _bezahlWerkzeug.neuerVerkauf(preis);
             }
         });
 

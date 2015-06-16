@@ -10,29 +10,39 @@ import javax.swing.JPanel;
 import de.uni_hamburg.informatik.swt.se2.kino.fachwerte.Platz;
 import de.uni_hamburg.informatik.swt.se2.kino.materialien.Kinosaal;
 import de.uni_hamburg.informatik.swt.se2.kino.materialien.Vorstellung;
+import de.uni_hamburg.informatik.swt.se2.kino.werkzeuge.SubwerkzeugObserver;
+import de.uni_hamburg.informatik.swt.se2.kino.werkzeuge.bezahl.BezahlWerkzeug;
 
 /**
  * Mit diesem Werkzeug können Plätze verkauft und storniert werden. Es arbeitet
  * auf einer Vorstellung als Material. Mit ihm kann angezeigt werden, welche
  * Plätze schon verkauft und welche noch frei sind.
  * 
- * Dieses Werkzeug ist ein eingebettetes Subwerkzeug.
+ * Dieses Werkzeug ist ein eingebettetes Subwerkzeug. 
+ * 
+ * Das PlatzVerkaufsWerkzeug implementiert das Interface SubwerkzeugObserver. Von
+ * ihm wird das Werkzeug BezahlWerkzeug beobachtet.
  * 
  * @author SE2-Team
  * @version SoSe 2015
  */
-public class PlatzVerkaufsWerkzeug
+public class PlatzVerkaufsWerkzeug implements SubwerkzeugObserver
 {
     // Die aktuelle Vorstellung, deren Plätze angezeigt werden. Kann null sein.
     private Vorstellung _vorstellung;
 
     private PlatzVerkaufsWerkzeugUI _ui;
+    
+    private BezahlWerkzeug _bezahlWerkzeug;
 
     /**
      * Initialisiert das PlatzVerkaufsWerkzeug.
      */
     public PlatzVerkaufsWerkzeug()
     {
+        _bezahlWerkzeug = new BezahlWerkzeug();
+        _bezahlWerkzeug.registriereBeobachter(this);
+        
         _ui = new PlatzVerkaufsWerkzeugUI();
         registriereUIAktionen();
         // Am Anfang wird keine Vorstellung angezeigt:
@@ -49,6 +59,12 @@ public class PlatzVerkaufsWerkzeug
     {
         return _ui.getUIPanel();
     }
+    
+    @Override
+    public void reagiereAufAenderung()
+    {
+        //TODO        
+    }
 
     /**
      * Fügt der UI die Funktionalität hinzu mit entsprechenden Listenern.
@@ -60,6 +76,7 @@ public class PlatzVerkaufsWerkzeug
             @Override
             public void actionPerformed(ActionEvent e)
             {
+                //TODO
                 fuehreBarzahlungDurch();
             }
         });

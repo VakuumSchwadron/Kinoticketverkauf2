@@ -28,7 +28,7 @@ import de.uni_hamburg.informatik.swt.se2.kino.fachwerte.Platz;
  * @author SE2-Team
  * @version SoSe 2015
  */
-class JPlatzplan extends JComponent
+public class JPlatzplan extends JComponent
 {
     public static Dimension PLATZBUTTON_GROESSE = new Dimension(22, 22);
 

@@ -1,6 +1,5 @@
 package de.uni_hamburg.informatik.swt.se2.kino.werkzeuge.bezahl;
 
-import package de.uni_hamburg.informatik.swt.se2.kino.werkzeuge.bezahl.BezahlWerkzeugUI;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -19,7 +18,7 @@ public class BezahlWerkzeug extends ObservableSubwerkzeug
 	
 	private void reagiereAufUIAktionen()
 	{
-		_gui.getOkButton().addActionListener(new ActionListener()
+		_gui.getOKButton().addActionListener(new ActionListener()
 		{
 			@Override
 			public void actionPerformed(ActionEvent e)
@@ -31,7 +30,7 @@ public class BezahlWerkzeug extends ObservableSubwerkzeug
 			}
 		});
 		
-		_gui.getAbbrechenButton().AddActionListener(new ActionListener()
+		_gui.getAbbrechenButton().addActionListener(new ActionListener()
 		{
 			@Override
 			public void actionPerformed(ActionEvent e)
@@ -41,7 +40,7 @@ public class BezahlWerkzeug extends ObservableSubwerkzeug
 			}
 		});
 		
-		_gui.getBezahltFeld().AddKeyListener(new KeyListener()
+		_gui.getBezahltFeld().addKeyListener(new KeyListener()
 		{
 			@Override
 			public void keyTyped(KeyEvent e)

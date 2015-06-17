@@ -7,6 +7,19 @@ import java.awt.event.KeyListener;
 
 import de.uni_hamburg.informatik.swt.se2.kino.werkzeuge.ObservableSubwerkzeug;
 
+/**
+* Mit diesem Werkzeug kann die Bezahlung der ausgewählten Plätze vorgenommen werden. 
+* Wird der Bezahlvorgang durch das Klicken auf der Verkaufen-Eingeleitet, erscheint 
+* ein neues Fenster. Dort werden der Preis für die ausgewählten Tickets und der noch 
+* ausstehende Betrag angegeben. Der vom Kunden bezahlte Betrag kann vom Anwender 
+* eingetragen werden. 
+* 
+* Dieses Werkzeug ist ein eingebettetes Subwerkzeug. Es benachrichtigt sein
+* Kontextwerkzeug, wenn eine Bezahlung abgeschlossen wurde.
+* 
+* @author VakuumSchwadron
+* @version SoSe 2015
+*/
 public class BezahlWerkzeug extends ObservableSubwerkzeug
 {
 	private BezahlWerkzeugUI _gui;
@@ -14,6 +27,7 @@ public class BezahlWerkzeug extends ObservableSubwerkzeug
 	public BezahlWerkzeug()
 	{
 		_gui = new BezahlWerkzeugUI();
+		reagiereAufUIAktionen();
 	}
 	
 	private void reagiereAufUIAktionen()

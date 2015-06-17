@@ -57,21 +57,28 @@ public class BezahlWerkzeug extends ObservableSubwerkzeug
 		_gui.getBezahltFeld().addKeyListener(new KeyListener()
 		{
 			@Override
-			public void keyTyped(KeyEvent e)
+			public void keyReleased(KeyEvent e)
 			{
-				
-				int i = e.getKeyChar();
+			    String anzeige = _gui.getBezahltFeld().getText();
+									    
+			    int i = e.getKeyChar();
+				System.out.println(i);
+			
 				if (i >= 48 && i <= 57)
 				{
 					aktualisiereRestbetrag();
 				}
-				else if(e.getKeyChar()==KeyEvent.CHAR_UNDEFINED)
+				else if(i == 8)
 				{
-					// Tue nichts, weil keine Unicode Eingabe
+				}
+							
+				else if((i>=33 && i<= 47) || (i>=58 && i<= 126))
+				{
+				    _gui.getBezahltFeld().setText(anzeige.substring(0, anzeige.length()-1));
 				}
 				else
 				{
-					_gui.getBezahltFeld().setText("Idiot!"); //TODO kleine Aenderungen durchfuehren...
+				    _gui.getBezahltFeld().setText("");
 				}
 			}
 
@@ -79,7 +86,7 @@ public class BezahlWerkzeug extends ObservableSubwerkzeug
 			public void keyPressed(KeyEvent e) {}
 
 			@Override
-			public void keyReleased(KeyEvent e) {}
+			public void keyTyped(KeyEvent e) {}
 
 			});
 		
@@ -99,7 +106,12 @@ public class BezahlWerkzeug extends ObservableSubwerkzeug
 	
 	private void aktualisiereRestbetrag()
 	{
-		//TODO
+//	    Integer preis = Integer.parseInt(_gui.getPreisLabel().getText());
+//	    Integer bezahlt = Integer.parseInt(_gui.getBezahltFeld().getText());
+//	    Integer restbetrag = bezahlt - preis;
+//	    _gui.getRestbetragLabel().setText(restbetrag.toString());
+	    System.out.println("aktualisiere ausgeführt");
+	    
 	}
 	
 	private void resetBezahlt()
@@ -122,7 +134,7 @@ public class BezahlWerkzeug extends ObservableSubwerkzeug
 	public void neuerVerkauf(int preis)
 	{
 		setPreis(preis);
-		aktualisiereRestbetrag();
+		_gui.getRestbetragLabel().setText(new Integer(-preis).toString());
 		guiZeigeAn();
 	}
 

@@ -54,10 +54,10 @@ public class BezahlWerkzeugUI
     /**
     * Zeigt das Fenster an
     */
-    public void setVisible()
+    public void setVisible(boolean visible)
     {
         _dialog.setLocationRelativeTo(null);
-        _dialog.setVisible(true);
+        _dialog.setVisible(visible);
     }
 
     /**

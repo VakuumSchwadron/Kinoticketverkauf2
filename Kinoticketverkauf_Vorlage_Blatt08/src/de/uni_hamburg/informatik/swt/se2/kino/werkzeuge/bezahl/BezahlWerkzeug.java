@@ -22,120 +22,203 @@ import de.uni_hamburg.informatik.swt.se2.kino.werkzeuge.ObservableSubwerkzeug;
 */
 public class BezahlWerkzeug extends ObservableSubwerkzeug
 {
-	private BezahlWerkzeugUI _gui;
-	
-	public BezahlWerkzeug()
-	{
-		_gui = new BezahlWerkzeugUI();
-		reagiereAufUIAktionen();
-	}
-	
-	private void reagiereAufUIAktionen()
-	{
-		_gui.getOKButton().addActionListener(new ActionListener()
-		{
-			@Override
-			public void actionPerformed(ActionEvent e)
-			{
-				guiBeende();
-				resetBezahlt();
-				
-				informiereUeberAenderung(); 
-			}
-		});
-		
-		_gui.getAbbrechenButton().addActionListener(new ActionListener()
-		{
-			@Override
-			public void actionPerformed(ActionEvent e)
-			{
-				guiBeende();
-				resetBezahlt();
-			}
-		});
-		
-		_gui.getBezahltFeld().addKeyListener(new KeyListener()
-		{
-			@Override
-			public void keyReleased(KeyEvent e)
-			{
-			    String anzeige = _gui.getBezahltFeld().getText();
-									    
-			    int i = e.getKeyChar();
-				System.out.println(i);
-			
-				if (i >= 48 && i <= 57)
-				{
-					aktualisiereRestbetrag();
-				}
-				else if(i == 8)
-				{
-				}
-							
-				else if((i>=33 && i<= 47) || (i>=58 && i<= 126))
-				{
-				    _gui.getBezahltFeld().setText(anzeige.substring(0, anzeige.length()-1));
-				}
-				else
-				{
-				    _gui.getBezahltFeld().setText("");
-				}
-			}
+    //Exemplarvariabelen
+    private BezahlWerkzeugUI _gui;
 
-			@Override
-			public void keyPressed(KeyEvent e) {}
+    /**
+     * Initialisiert das BezahlWerkzeug.
+     */
+    public BezahlWerkzeug()
+    {
+        _gui = new BezahlWerkzeugUI();
+        reagiereAufUIAktionen();
+    }
 
-			@Override
-			public void keyTyped(KeyEvent e) {}
+    /**
+     * Fügt der UI die Funktionalität hinzu mit entsprechenden Listenern.
+     */
+    private void reagiereAufUIAktionen()
+    {
+        _gui.getOKButton()
+            .addActionListener(new ActionListener()
+            {
+                @Override
+                public void actionPerformed(ActionEvent e)
+                {
+                    guiBeende();
+                    resetBezahlt();
 
-			});
-		
-		//TODO Evtl das x für Dialog einbauen
-		
-	}
-	
-	private void guiZeigeAn()
-	{
-		_gui.setVisible(true);
-	}
-	
-	private void guiBeende()
-	{
-		_gui.setVisible(false);
-	}
-	
-	private void aktualisiereRestbetrag()
-	{
-//	    Integer preis = Integer.parseInt(_gui.getPreisLabel().getText());
-//	    Integer bezahlt = Integer.parseInt(_gui.getBezahltFeld().getText());
-//	    Integer restbetrag = bezahlt - preis;
-//	    _gui.getRestbetragLabel().setText(restbetrag.toString());
-	    System.out.println("aktualisiere ausgeführt");
-	    
-	}
-	
-	private void resetBezahlt()
-	{
-		_gui.getBezahltFeld().setText("0");
-	}
-		
-	private void setPreis(int i)
-	{
-		String s = new Integer(i).toString();
-		_gui.getPreisLabel().setText(s);
-		
-	}
-		
-	private void okButtonAktualisieren()
-	{
-		
-	}
-	
-	public void neuerVerkauf(int preis)
-	{
-		setPreis(preis);
-		_gui.getRestbetragLabel().setText(new Integer(-preis).toString());
-		guiZeigeAn();
-	}
+                    informiereUeberAenderung();
+                }
+            });
+
+        _gui.getAbbrechenButton()
+            .addActionListener(new ActionListener()
+            {
+                @Override
+                public void actionPerformed(ActionEvent e)
+                {
+                    guiBeende();
+                    resetBezahlt();
+                }
+            });
+
+        _gui.getBezahltFeld()
+            .addKeyListener(new KeyListener()
+            {
+                @Override
+                public void keyReleased(KeyEvent e)
+                {
+                    char c = e.getKeyChar();
+                    if (Character.isDigit(c) || c == KeyEvent.VK_BACK_SPACE
+                            || c == KeyEvent.VK_DELETE)
+                    {
+                        aktualisiereRestbetrag();
+                    }
+                }
+
+                @Override
+                public void keyPressed(KeyEvent e)
+                {
+
+                }
+
+                @Override
+                public void keyTyped(KeyEvent e)
+                {
+                    char c = e.getKeyChar();
+                    if (!(Character.isDigit(c) || c == KeyEvent.VK_BACK_SPACE || c == KeyEvent.VK_DELETE))
+                    {
+                        e.consume();
+                    }
+                }
+
+            });
+
+        //TODO Evtl das x für Dialog einbauen
+
+    }
+    
+    /**
+     * Die Benutzerschnittstelle für die Barzahlung ist für den Anwender sichtbar.
+     */
+    private void guiZeigeAn()
+    {
+        _gui.setVisible(true);
+    }
+
+    /**
+     * Die Benutzerschnittstelle für die Barzahlung ist für den Benutzer nicht mehr sichtbar.
+     */
+    private void guiBeende()
+    {
+        _gui.setVisible(false);
+    }
+
+    /**
+     * Der Restbetrag wird neu aus dem Preis der ausgewählten Plätze und der vom Kunden bereits getätigten
+     * Zahlung berechnet. Der neue Restbetrag wird dann in der Benutzerschnittstelle angezeigt.
+     */
+    private void aktualisiereRestbetrag()
+    {
+        int preis = Integer.parseInt(_gui.getPreisLabel()
+            .getText());
+        int restbetrag;
+
+        if (_gui.getBezahltFeld()
+            .getText()
+            .length() > 0)
+        {
+            int bezahlt = Integer.parseInt(_gui.getBezahltFeld()
+                .getText());
+            restbetrag = bezahlt - preis;
+        }
+        else
+        {
+            restbetrag = -preis;
+        }
+        _gui.getRestbetragLabel()
+            .setText(Integer.toString(restbetrag));
+        okButtonAktualisieren();
+    }
+
+    //TODO zu lange Strings verbieten! 
+
+    /**
+     * Leert das Feld, in dem der Anwender die vom Kunden gezahlte Summe eintragen kann.
+     */
+    private void resetBezahlt()
+    {
+        _gui.getBezahltFeld()
+            .setText("");
+    }
+
+    /**
+     * Setzt den vom Preislabels angezeigten Wert. 
+     * 
+     * @param i Preis, der vom Preislabel angezeigt werden soll
+     */
+    private void setPreis(int i)
+    {
+        String s = new Integer(i).toString();
+        _gui.getPreisLabel()
+            .setText(s);
+    }
+    
+    /**
+     * Diese Methode gibt an, ob der Kunde eine ausreichende Summe gezahlt hat.
+     *
+     * @return true, wenn der Kunde mindestens den Preis der ausgewählten Tickets bezahlt hat
+     */
+    private boolean istVerkaufenMoeglich()
+    {
+        int preis = Integer.parseInt(_gui.getPreisLabel()
+            .getText());
+        int restbetrag;
+
+        if (_gui.getBezahltFeld()
+            .getText()
+            .length() > 0)
+        {
+            int bezahlt = Integer.parseInt(_gui.getBezahltFeld()
+                .getText());
+            restbetrag = bezahlt - preis;
+        }
+        else
+        {
+            restbetrag = -preis;
+        }
+
+        return restbetrag >= 0;
+    }
+
+    /**
+     * Der Ok-Button wird der aktuellen Bezahl-Sitation angepasst. Ist der Verkauf der ausgewählten
+     * Plätze möglich, dh. wurde eine ausreichende Summe gezahlt, soll der Button zu betätigen sein.
+     * Andernfalls nicht.
+     */
+    private void okButtonAktualisieren()
+    {
+        _gui.getOKButton()
+            .setEnabled(istVerkaufenMoeglich());
+    }
+
+    /**
+     * Passt die Anzeige der Benutzerschnittstelle für einen neuen Verkauf ohne bisherige Zahlung
+     * und für einen gegeben Preis an. 
+     *
+     * @param preis Preis der ausgewählten Tickets
+     * 
+     * @require preis > 0
+     */
+    public void neuerVerkauf(int preis)
+    {
+        assert preis > 0 : "Vorbedingung verletzt"; 
+        
+        setPreis(preis);
+        _gui.getRestbetragLabel()
+            .setText(new Integer(-preis).toString());
+        guiZeigeAn();
+    }
 
 }

@@ -17,12 +17,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import javax.swing.text.NumberFormatter;
-import javax.swing.JFormattedTextField;
-
-import java.text.NumberFormat;
-import javax.swing.JFrame;
-
 /**
  * Die UI des BezahlWerkzeug.
  * 
@@ -38,8 +32,7 @@ public class BezahlWerkzeugUI
     private JTextField _bezahlt;
     private JTextField _restbetrag;
     private JTextField _preis;
-
-    private static final Color SCHRIFTFARBE_NORMAL = new Color(95, 247, 0);
+    private static final Color SCHRIFTFARBE_NORMAL = new Color(0, 0, 255);
     private static final Color HINTERGRUNDFARBE = new Color(30, 30, 30);
     private static final Font SCHRIFTART_GROSS = new Font("Monospaced",
             Font.BOLD, 28);
@@ -62,14 +55,6 @@ public class BezahlWerkzeugUI
     {
         _dialog.setLocationRelativeTo(null);
         _dialog.setVisible(visible);
-    }
-
-    /**
-    * Verbirgt das Fenster.
-    */
-    public void verberge()
-    {
-        _dialog.setVisible(false);
     }
 
     /**
@@ -121,11 +106,13 @@ public class BezahlWerkzeugUI
         return _dialog;
     }
 
+    /**
+     * Initialisiert das Hauptdialogfenster
+     */
     private void initDialog()
     {
         _dialog = new JDialog((Frame) null, "BezahlWerkzeug");
         _dialog.setModalityType(Dialog.DEFAULT_MODALITY_TYPE);
-
         _dialog.setLayout(new BorderLayout());
         _dialog.add(erstelleBetragsPanel(), BorderLayout.CENTER);
         _dialog.add(erstelleButtonPanel(), BorderLayout.SOUTH);
@@ -162,15 +149,15 @@ public class BezahlWerkzeugUI
         betraege.setLayout(new BoxLayout(betraege, BoxLayout.Y_AXIS));
         initPreisTextfeld();
         betraege.add(erstelleLayoutPanel("Preis", _preis));
-        initGegebenTextfield();
+        initBezahltTextfield();
         betraege.add(erstelleLayoutPanel("Bezahlt", _bezahlt));
-        initRestTextfield();
+        initRestbetragTextfield();
         betraege.add(erstelleLayoutPanel("Restbetrag", _restbetrag));
 
         return betraege;
     }
 
-    private void initRestTextfield()
+    private void initRestbetragTextfield()
     {
         _restbetrag = new JTextField(TEXTFELDBREITE);
         _restbetrag.setHorizontalAlignment(JTextField.RIGHT);
@@ -181,10 +168,9 @@ public class BezahlWerkzeugUI
         _restbetrag.setFont(SCHRIFTART_KLEIN);
     }
 
-    private void initGegebenTextfield()
+    private void initBezahltTextfield()
     {
         _bezahlt = new JTextField(TEXTFELDBREITE);
-
         _bezahlt.setCaretColor(SCHRIFTFARBE_NORMAL);
         _bezahlt.setHorizontalAlignment(JTextField.RIGHT);
         _bezahlt.setMargin(new Insets(5, 5, 5, 5));

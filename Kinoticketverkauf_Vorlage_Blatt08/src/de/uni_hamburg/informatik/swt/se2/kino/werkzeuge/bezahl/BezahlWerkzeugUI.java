@@ -53,7 +53,9 @@ public class BezahlWerkzeugUI
     }
 
     /**
-    * Zeigt das Fenster an
+    * Zeigt das Fenster an oder versteckt das Fenster.
+    * 
+    * @require visible !=null
     */
     public void setVisible(boolean visible)
     {
@@ -62,7 +64,6 @@ public class BezahlWerkzeugUI
     }
     
     /**
-     * 
      * @return Label für die Währung
      */
     public JLabel getWaehrungLabel()
@@ -174,7 +175,10 @@ public class BezahlWerkzeugUI
 
         return betraege;
     }
-
+    
+    /**
+     * Erstellt das Textfeld für den Restbetrag.
+     */
     private void initRestbetragTextfield()
     {
         _restbetrag = new JTextField(TEXTFELDBREITE);
@@ -186,6 +190,9 @@ public class BezahlWerkzeugUI
         _restbetrag.setFont(SCHRIFTART_KLEIN);
     }
 
+    /**
+     * Erstellt das Textfeld für den bezahlten Betrag.
+     */
     private void initBezahltTextfield()
     {
         _bezahlt = new JTextField(TEXTFELDBREITE);
@@ -198,6 +205,9 @@ public class BezahlWerkzeugUI
         _bezahlt.requestFocus();
     }
 
+    /**
+     * Erstellt das Textfeld für den Preis.
+     */
     private void initPreisTextfeld()
     {
         _preis = new JTextField(TEXTFELDBREITE);

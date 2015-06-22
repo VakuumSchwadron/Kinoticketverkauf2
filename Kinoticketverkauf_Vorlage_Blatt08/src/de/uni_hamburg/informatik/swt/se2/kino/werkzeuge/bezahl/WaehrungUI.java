@@ -8,10 +8,16 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+/**
+ * Die GUI für die Änderung der Währung
+ * 
+ * @author VakuumSchwadron
+ * @version SoSe15
+ *
+ */
 public class WaehrungUI
 {
 
@@ -20,6 +26,9 @@ public class WaehrungUI
     JButton _abbrechen;
     JComboBox<String> _liste;
     
+    /**
+     * Initialisiert die Währungs-GUI
+     */
     public WaehrungUI()
     {
        _fenster = new JDialog();
@@ -40,6 +49,11 @@ public class WaehrungUI
        _fenster.add(center, BorderLayout.CENTER);
     }
     
+    /**
+     * Bindet die Buttons in ein Panel ein
+     * 
+     * @return panel Panel, in das der Abbrechen- und der ok-Button eingebunden sind
+     */
     private JPanel initialisiereButtons()
     {
         JPanel panel = new JPanel();
@@ -50,7 +64,11 @@ public class WaehrungUI
         
         return panel;
     }
-    
+
+    /**
+     * 
+     * @return panel
+     */
     private JPanel initialisiereListe()
     {
         JPanel panel = new JPanel();

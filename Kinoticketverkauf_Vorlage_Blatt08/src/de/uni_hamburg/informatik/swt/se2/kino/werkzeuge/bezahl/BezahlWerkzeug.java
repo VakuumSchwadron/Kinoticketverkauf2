@@ -189,6 +189,7 @@ public class BezahlWerkzeug extends ObservableSubwerkzeug
     private void guiZeigeAn()
     {
         _gui.setVisible(true);
+        _gui.getBezahltFeld().requestFocus();
     }
 
     /**
@@ -226,7 +227,6 @@ public class BezahlWerkzeug extends ObservableSubwerkzeug
         okButtonAktualisieren();
     }
 
-    //TODO zu lange Strings verbieten! 
 
     /**
      * Leert das Feld, in dem der Anwender die vom Kunden gezahlte Summe eintragen kann.

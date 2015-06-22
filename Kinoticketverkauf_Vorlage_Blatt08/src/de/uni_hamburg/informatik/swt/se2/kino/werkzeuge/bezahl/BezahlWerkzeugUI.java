@@ -36,7 +36,7 @@ public class BezahlWerkzeugUI
     //Währungsauswahl
     private JLabel _waehrung;
     
-    private static final Color SCHRIFTFARBE_NORMAL = new Color(0, 0, 255);
+    private static final Color SCHRIFTFARBE_NORMAL = new Color(255, 255, 255);
     private static final Color HINTERGRUNDFARBE = new Color(30, 30, 30);
     private static final Font SCHRIFTART_GROSS = new Font("Monospaced",
             Font.BOLD, 28);

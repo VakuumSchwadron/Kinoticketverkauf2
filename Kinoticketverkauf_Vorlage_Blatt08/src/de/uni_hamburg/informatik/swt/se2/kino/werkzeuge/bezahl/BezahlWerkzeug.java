@@ -100,6 +100,11 @@ public class BezahlWerkzeug extends ObservableSubwerkzeug
                     {
                         e.consume();
                     }
+                    
+                    else if(_gui.getBezahltFeld().getText().length() > 8)
+                    {
+                    	e.consume();
+                    }
                 }
 
             });
@@ -329,13 +334,17 @@ public class BezahlWerkzeug extends ObservableSubwerkzeug
     	{
     		preis = _preis / 200;
     	}
-    	else if (s.equals("Ich bin Chuck Norris"))
+    	else if (s.equals("Kunde ist Chuck Norris"))
     	{
     		preis = 0;
     	}
     	else if (s.equals("Dollarcent"))
     	{
     		preis = (114 * _preis)/100;
+    	}
+    	else if(s.equals("mBitcoin"))
+    	{
+    		preis = 216 * preis / 1000;
     	}
     	
     	_gui.getPreisLabel()

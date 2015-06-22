@@ -1,11 +1,13 @@
 package de.uni_hamburg.informatik.swt.se2.kino.werkzeuge.bezahl;
 
 import java.awt.BorderLayout;
+import java.awt.Dialog;
 import java.awt.FlowLayout;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -13,21 +15,22 @@ import javax.swing.JPanel;
 public class WaehrungUI
 {
 
-    JFrame _fenster;
+    JDialog _fenster;
     JButton _ok;
     JButton _abbrechen;
     JComboBox<String> _liste;
     
     public WaehrungUI()
     {
-       _fenster = new JFrame();
+       _fenster = new JDialog();
+       _fenster.setModalityType(Dialog.DEFAULT_MODALITY_TYPE);
        _fenster.setUndecorated(true);
        _fenster.setLayout(new BorderLayout());
        _fenster.setBounds(500,300,300,165);
        _ok = new JButton("OK");
        _abbrechen = new JButton("Abbrechen");
        
-       String[] auswahl = {"Eurocent", "Dollarcent", "Bonbons","Hamster",  "Blowjob", "Steine", "Ich bin Chuck Norris"};
+       String[] auswahl = {"Eurocent", "Dollarcent", "mBitcoin", "Bonbons","Hamster",  "Blowjob", "Steine", "Kunde ist Chuck Norris"};
        _liste = new JComboBox<String>(auswahl);
        
        JPanel sueden = initialisiereButtons();

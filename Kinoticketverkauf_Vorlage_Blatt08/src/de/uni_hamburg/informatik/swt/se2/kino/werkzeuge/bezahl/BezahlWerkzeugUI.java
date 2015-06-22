@@ -82,7 +82,7 @@ public class BezahlWerkzeugUI
     /**
     * @return Textfeld für den Preis
     */
-    public JTextField getPreisLabel()
+    public JTextField getPreisFeld()
     {
         return _preis;
     }
@@ -90,7 +90,7 @@ public class BezahlWerkzeugUI
     /**
      * @return Textfeld für den Restbetrag
      */
-    public JTextField getRestbetragLabel()
+    public JTextField getRestbetragFeld()
     {
         return _restbetrag;
     }

@@ -4,10 +4,10 @@ import java.awt.Color;
 //import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 import de.uni_hamburg.informatik.swt.se2.kino.werkzeuge.ObservableSubwerkzeug;
 
@@ -73,7 +73,7 @@ public class BezahlWerkzeug extends ObservableSubwerkzeug
             });
 
         _gui.getBezahltFeld()
-            .addKeyListener(new KeyListener()
+            .addKeyListener(new KeyAdapter()
             {
                 @Override
                 public void keyReleased(KeyEvent e)
@@ -84,12 +84,6 @@ public class BezahlWerkzeug extends ObservableSubwerkzeug
                     {
                         aktualisiereRestbetrag();
                     }
-                }
-
-                @Override
-                public void keyPressed(KeyEvent e)
-                {
-
                 }
 
                 @Override
@@ -109,18 +103,8 @@ public class BezahlWerkzeug extends ObservableSubwerkzeug
 
             });
 
-        _gui.getWaehrungLabel().addMouseListener(new MouseListener() {
-			
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				
-				
-			}
-			
-			@Override
-			public void mousePressed(MouseEvent e) {
+        _gui.getWaehrungLabel().addMouseListener(new MouseAdapter() {
 
-			}
 			
 			@Override
 			public void mouseExited(MouseEvent e) {
@@ -201,7 +185,7 @@ public class BezahlWerkzeug extends ObservableSubwerkzeug
      */
     private void aktualisiereRestbetrag()
     {
-        int preis = Integer.parseInt(_gui.getPreisLabel()
+        int preis = Integer.parseInt(_gui.getPreisFeld()
             .getText());
         int restbetrag;
 
@@ -217,7 +201,7 @@ public class BezahlWerkzeug extends ObservableSubwerkzeug
         {
             restbetrag = -preis;
         }
-        _gui.getRestbetragLabel()
+        _gui.getRestbetragFeld()
             .setText(Integer.toString(restbetrag));
         okButtonAktualisieren();
     }
@@ -240,7 +224,7 @@ public class BezahlWerkzeug extends ObservableSubwerkzeug
     private void setPreis(int i)
     {
         String s = new Integer(i).toString();
-        _gui.getPreisLabel()
+        _gui.getPreisFeld()
             .setText(s);
     }
     
@@ -251,7 +235,7 @@ public class BezahlWerkzeug extends ObservableSubwerkzeug
      */
     private boolean istVerkaufenMoeglich()
     {
-        int preis = Integer.parseInt(_gui.getPreisLabel()
+        int preis = Integer.parseInt(_gui.getPreisFeld()
             .getText());
         int restbetrag;
 
@@ -296,7 +280,7 @@ public class BezahlWerkzeug extends ObservableSubwerkzeug
         
         _preis = preis;
         setPreis(preis);
-        _gui.getRestbetragLabel()
+        _gui.getRestbetragFeld()
             .setText(new Integer(-preis).toString());
         guiZeigeAn();
     }
@@ -335,9 +319,9 @@ public class BezahlWerkzeug extends ObservableSubwerkzeug
     	}
     	
     	
-    	_gui.getPreisLabel()
+    	_gui.getPreisFeld()
         .setText(new Integer(preis).toString());
-		_gui.getRestbetragLabel()
+		_gui.getRestbetragFeld()
         .setText(new Integer(-preis).toString());
 		_gui.getBezahltFeld().setText("");
 		_gui.getDialog().pack();

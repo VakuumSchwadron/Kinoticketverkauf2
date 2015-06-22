@@ -52,7 +52,7 @@ public class WaehrungUI
     /**
      * Bindet die Buttons in ein Panel ein
      * 
-     * @return panel Panel, in das der Abbrechen- und der ok-Button eingebunden sind
+     * @return Panel, in das der Abbrechen- und der ok-Button eingebunden sind
      */
     private JPanel initialisiereButtons()
     {
@@ -66,8 +66,9 @@ public class WaehrungUI
     }
 
     /**
+     * Bindet die JComboBox mit einer Überschrift in ein Label ein.
      * 
-     * @return panel
+     * @return Panel mit der ComboBox und einer Überschrift
      */
     private JPanel initialisiereListe()
     {
@@ -88,21 +89,41 @@ public class WaehrungUI
         return panel;
      }
     
+    /**
+     * Mit dieser Methode kann die GUI sichtbar beziehungsweise unsichtbar gemacht werden
+     * 
+     * @param b true, wenn die GUI sichtbar gemacht werden soll
+     */
     public void setVisible(boolean b)
     {
         _fenster.setVisible(b);
     }
     
+    /**
+     * Liefert den ok-Button zurück.
+     * 
+     * @return der ok-Button von WaehrungUI
+     */
     public JButton getOkButton()
     {
     	return _ok;
     }
     
+    /**
+    * Liefert den abbrechen-Button zurück.
+    * 
+    * @return  der abbrechen-Button von WaehrungUI
+    */
     public JButton getAbbrechenButton()
     {
     	return _abbrechen;
     }
     
+    /**
+     * Liefert die JComboBox zurück.
+     * 
+     * @return die JComboBox von WaehrungUI
+     */
     public JComboBox<String> getComboBox()
     {
     	return _liste;

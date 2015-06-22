@@ -162,12 +162,7 @@ public class BezahlWerkzeug extends ObservableSubwerkzeug
 			public void actionPerformed(ActionEvent e) {
 				_wgui.setVisible(false);
 				_gui.setVisible(true);
-				
-				
 			}
-		
-			
-			
 		});
     	
     	_wgui.getOkButton().addActionListener(new ActionListener() {
@@ -177,7 +172,6 @@ public class BezahlWerkzeug extends ObservableSubwerkzeug
 				passeWaehrungAn((String) _wgui.getComboBox().getSelectedItem());
 				_wgui.setVisible(false);
 				_gui.setVisible(true);
-				
 			}
 		});
     	
@@ -306,46 +300,71 @@ public class BezahlWerkzeug extends ObservableSubwerkzeug
         guiZeigeAn();
     }
     
+    /**
+     *  
+     * @param s Währung, an die das Bezahlfenster angepasst werden soll
+     * 
+     * @require s != null
+     */
     private void passeWaehrungAn(String s)
     {
-    	//Preis umrechnen und setzen
-    	// Bezahlt auf ""
-    	// Restbetrag auf -Preis (aktualisiere Restbetrag)
+    	assert s != null : "Vorbedingung verletzt";
     	
     	_gui.getWaehrungLabel().setText(s);
     	int preis = _preis;
     	
-    	if (s.equals("Eurocent"))
+    	switch(s)
     	{
-       	}
-    	else if (s.equals("Steine"))
-    	{
-    		preis = _preis * 4;
+    	case "Eurocent": 
+    		break;
+    	case "Steine": preis = _preis * 4;
+    		break;
+    	case "Bonbons": preis = _preis / 10;
+    		break;
+    	case "Blowjob": preis = 1;
+    		break;
+    	case "Hamster": preis = _preis / 200;
+    		break;
+    	case "Kunde ist Chuck Norris": preis = 0;
+    		break;
+    	case "Dollarcent": preis = (114 * _preis)/100;
+    		break;
+    	case "mBitcoin": preis = 216 * preis / 1000;
+    		break;
     	}
-    	else if (s.equals("Bonbons"))
-    	{
-    		preis = _preis / 10;
-    	}
-    	else if (s.equals("Blowjob"))
-    	{
-    		preis = 1;
-    	}
-    	else if (s.equals("Hamster"))
-    	{
-    		preis = _preis / 200;
-    	}
-    	else if (s.equals("Kunde ist Chuck Norris"))
-    	{
-    		preis = 0;
-    	}
-    	else if (s.equals("Dollarcent"))
-    	{
-    		preis = (114 * _preis)/100;
-    	}
-    	else if(s.equals("mBitcoin"))
-    	{
-    		preis = 216 * preis / 1000;
-    	}
+    	
+//    	
+//    	if (s.equals("Eurocent"))
+//    	{
+//       	}
+//    	else if (s.equals("Steine"))
+//    	{
+//    		preis = _preis * 4;
+//    	}
+//    	else if (s.equals("Bonbons"))
+//    	{
+//    		preis = _preis / 10;
+//    	}
+//    	else if (s.equals("Blowjob"))
+//    	{
+//    		preis = 1;
+//    	}
+//    	else if (s.equals("Hamster"))
+//    	{
+//    		preis = _preis / 200;
+//    	}
+//    	else if (s.equals("Kunde ist Chuck Norris"))
+//    	{
+//    		preis = 0;
+//    	}
+//    	else if (s.equals("Dollarcent"))
+//    	{
+//    		preis = (114 * _preis)/100;
+//    	}
+//    	else if(s.equals("mBitcoin"))
+//    	{
+//    		preis = 216 * preis / 1000;
+//    	}
     	
     	_gui.getPreisLabel()
         .setText(new Integer(preis).toString());

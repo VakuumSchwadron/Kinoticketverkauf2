@@ -6,7 +6,6 @@ import java.awt.FlowLayout;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -28,7 +27,7 @@ public class WaehrungUI
        _ok = new JButton("OK");
        _abbrechen = new JButton("Abbrechen");
        
-       String[] auswahl = {"Eurocent","Bonbons","Hamster", "Sklaven", "Kaffeebohnen", "Chuck Norris"};
+       String[] auswahl = {"Eurocent", "Dollarcent", "Bonbons","Hamster",  "Blowjob", "Steine", "Ich bin Chuck Norris"};
        _liste = new JComboBox<String>(auswahl);
        
        JPanel sueden = initialisiereButtons();

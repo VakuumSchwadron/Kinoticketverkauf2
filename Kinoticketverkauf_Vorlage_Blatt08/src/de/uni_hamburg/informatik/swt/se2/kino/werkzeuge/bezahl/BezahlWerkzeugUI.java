@@ -9,7 +9,6 @@ import java.awt.Font;
 import java.awt.Frame;
 import java.awt.Insets;
 
-import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComponent;

@@ -1,7 +1,7 @@
 package de.uni_hamburg.informatik.swt.se2.kino.werkzeuge.bezahl;
 
 import java.awt.Color;
-import java.awt.Font;
+//import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -119,21 +119,23 @@ public class BezahlWerkzeug extends ObservableSubwerkzeug
 			
 			@Override
 			public void mouseExited(MouseEvent e) {
-				Font font = _gui.getWaehrungLabel().getFont();
-				// same font but bold
-				Font boldFont = new Font(font.getFontName(), Font.PLAIN, font.getSize()-1);
+//				Font font = _gui.getWaehrungLabel().getFont();
+//				// same font but bold
+//				Font boldFont = new Font(font.getFontName(), Font.PLAIN, font.getSize()-1);
+//				_gui.getWaehrungLabel().setFont(boldFont);
+				
 				_gui.getWaehrungLabel().setForeground(Color.black);
-				_gui.getWaehrungLabel().setFont(boldFont);
 				
 			}
 			
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				Font font = _gui.getWaehrungLabel().getFont();
-				// same font but bold
-				Font boldFont = new Font(font.getFontName(), Font.BOLD, font.getSize()+1);
+//				Font font = _gui.getWaehrungLabel().getFont();
+//				// same font but bold
+//				Font boldFont = new Font(font.getFontName(), Font.BOLD, font.getSize()+1);
+//				_gui.getWaehrungLabel().setFont(boldFont);
+				
 				_gui.getWaehrungLabel().setForeground(Color.red);
-				_gui.getWaehrungLabel().setFont(boldFont);
 				
 			}
 			
@@ -311,17 +313,29 @@ public class BezahlWerkzeug extends ObservableSubwerkzeug
     	if (s.equals("Eurocent"))
     	{
        	}
-    	else if (s.equals("Bonbons"))
+    	else if (s.equals("Steine"))
     	{
     		preis = _preis * 4;
+    	}
+    	else if (s.equals("Bonbons"))
+    	{
+    		preis = _preis / 10;
+    	}
+    	else if (s.equals("Blowjob"))
+    	{
+    		preis = 1;
     	}
     	else if (s.equals("Hamster"))
     	{
     		preis = _preis / 200;
     	}
-    	else if (s.equals("Chuck Norris"))
+    	else if (s.equals("Ich bin Chuck Norris"))
     	{
     		preis = 0;
+    	}
+    	else if (s.equals("Dollarcent"))
+    	{
+    		preis = (114 * _preis)/100;
     	}
     	
     	_gui.getPreisLabel()
@@ -329,6 +343,7 @@ public class BezahlWerkzeug extends ObservableSubwerkzeug
 		_gui.getRestbetragLabel()
         .setText(new Integer(-preis).toString());
 		_gui.getBezahltFeld().setText("");
+		_gui.getDialog().pack();
     }
 
 }

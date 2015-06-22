@@ -182,6 +182,7 @@ public class BezahlWerkzeug extends ObservableSubwerkzeug
      */
     private void guiZeigeAn()
     {
+    	_gui.getWaehrungLabel().setText("Eurocent");
         _gui.setVisible(true);
         _gui.getBezahltFeld().requestFocus();
     }
@@ -333,38 +334,6 @@ public class BezahlWerkzeug extends ObservableSubwerkzeug
     		break;
     	}
     	
-//    	
-//    	if (s.equals("Eurocent"))
-//    	{
-//       	}
-//    	else if (s.equals("Steine"))
-//    	{
-//    		preis = _preis * 4;
-//    	}
-//    	else if (s.equals("Bonbons"))
-//    	{
-//    		preis = _preis / 10;
-//    	}
-//    	else if (s.equals("Blowjob"))
-//    	{
-//    		preis = 1;
-//    	}
-//    	else if (s.equals("Hamster"))
-//    	{
-//    		preis = _preis / 200;
-//    	}
-//    	else if (s.equals("Kunde ist Chuck Norris"))
-//    	{
-//    		preis = 0;
-//    	}
-//    	else if (s.equals("Dollarcent"))
-//    	{
-//    		preis = (114 * _preis)/100;
-//    	}
-//    	else if(s.equals("mBitcoin"))
-//    	{
-//    		preis = 216 * preis / 1000;
-//    	}
     	
     	_gui.getPreisLabel()
         .setText(new Integer(preis).toString());

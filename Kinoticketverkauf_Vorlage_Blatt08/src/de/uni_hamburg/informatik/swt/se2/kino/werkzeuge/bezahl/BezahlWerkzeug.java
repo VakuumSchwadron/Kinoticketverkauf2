@@ -1,9 +1,13 @@
 package de.uni_hamburg.informatik.swt.se2.kino.werkzeuge.bezahl;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import de.uni_hamburg.informatik.swt.se2.kino.werkzeuge.ObservableSubwerkzeug;
 
@@ -24,6 +28,8 @@ public class BezahlWerkzeug extends ObservableSubwerkzeug
 {
     //Exemplarvariabelen
     private BezahlWerkzeugUI _gui;
+    private WaehrungUI _wgui;
+    private int _preis;
 
     /**
      * Initialisiert das BezahlWerkzeug.
@@ -31,6 +37,9 @@ public class BezahlWerkzeug extends ObservableSubwerkzeug
     public BezahlWerkzeug()
     {
         _gui = new BezahlWerkzeugUI();
+        _wgui = new WaehrungUI();
+        _preis = 0;
+        reagiereAufWGUIAktionen();
         reagiereAufUIAktionen();
     }
 
@@ -95,8 +104,76 @@ public class BezahlWerkzeug extends ObservableSubwerkzeug
 
             });
 
-        //TODO Evtl das x für Dialog einbauen
+        _gui.getWaehrungLabel().addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
 
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				Font font = _gui.getWaehrungLabel().getFont();
+				// same font but bold
+				Font boldFont = new Font(font.getFontName(), Font.PLAIN, font.getSize()-1);
+				_gui.getWaehrungLabel().setForeground(Color.black);
+				_gui.getWaehrungLabel().setFont(boldFont);
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				Font font = _gui.getWaehrungLabel().getFont();
+				// same font but bold
+				Font boldFont = new Font(font.getFontName(), Font.BOLD, font.getSize()+1);
+				_gui.getWaehrungLabel().setForeground(Color.red);
+				_gui.getWaehrungLabel().setFont(boldFont);
+				
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				_gui.setVisible(false);
+				_wgui.setVisible(true);
+				
+			}
+		});
+        
+    }
+    
+    private void reagiereAufWGUIAktionen()
+    {
+    	_wgui.getAbbrechenButton().addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				_wgui.setVisible(false);
+				_gui.setVisible(true);
+				
+				
+			}
+		
+			
+			
+		});
+    	
+    	_wgui.getOkButton().addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				passeWaehrungAn((String) _wgui.getComboBox().getSelectedItem());
+				_wgui.setVisible(false);
+				_gui.setVisible(true);
+				
+			}
+		});
+    	
     }
     
     /**
@@ -215,10 +292,43 @@ public class BezahlWerkzeug extends ObservableSubwerkzeug
     {
         assert preis > 0 : "Vorbedingung verletzt"; 
         
+        _preis = preis;
         setPreis(preis);
         _gui.getRestbetragLabel()
             .setText(new Integer(-preis).toString());
         guiZeigeAn();
+    }
+    
+    private void passeWaehrungAn(String s)
+    {
+    	//Preis umrechnen und setzen
+    	// Bezahlt auf ""
+    	// Restbetrag auf -Preis (aktualisiere Restbetrag)
+    	
+    	_gui.getWaehrungLabel().setText(s);
+    	int preis = _preis;
+    	
+    	if (s.equals("Eurocent"))
+    	{
+       	}
+    	else if (s.equals("Bonbons"))
+    	{
+    		preis = _preis * 4;
+    	}
+    	else if (s.equals("Hamster"))
+    	{
+    		preis = _preis / 200;
+    	}
+    	else if (s.equals("Chuck Norris"))
+    	{
+    		preis = 0;
+    	}
+    	
+    	_gui.getPreisLabel()
+        .setText(new Integer(preis).toString());
+		_gui.getRestbetragLabel()
+        .setText(new Integer(-preis).toString());
+		_gui.getBezahltFeld().setText("");
     }
 
 }

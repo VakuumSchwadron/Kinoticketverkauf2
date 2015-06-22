@@ -9,6 +9,7 @@ import java.awt.Font;
 import java.awt.Frame;
 import java.awt.Insets;
 
+import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -32,6 +33,10 @@ public class BezahlWerkzeugUI
     private JTextField _bezahlt;
     private JTextField _restbetrag;
     private JTextField _preis;
+    
+    //Währungsauswahl
+    private JLabel _waehrung;
+    
     private static final Color SCHRIFTFARBE_NORMAL = new Color(0, 0, 255);
     private static final Color HINTERGRUNDFARBE = new Color(30, 30, 30);
     private static final Font SCHRIFTART_GROSS = new Font("Monospaced",
@@ -56,7 +61,16 @@ public class BezahlWerkzeugUI
         _dialog.setLocationRelativeTo(null);
         _dialog.setVisible(visible);
     }
-
+    
+    /**
+     * 
+     * @return Label für die Währung
+     */
+    public JLabel getWaehrungLabel()
+    {
+    	return _waehrung;
+    }
+    
     /**
      * @return Textfeld für den gegebenen Betrag
      */
@@ -129,6 +143,9 @@ public class BezahlWerkzeugUI
     private JPanel erstelleButtonPanel()
     {
         JPanel rueckgabePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        _waehrung = new JLabel("Eurocent");
+        rueckgabePanel.add(_waehrung);
+        
         _ok = new JButton("OK");
         rueckgabePanel.add(_ok);
         _ok.setEnabled(false);
@@ -136,6 +153,8 @@ public class BezahlWerkzeugUI
         rueckgabePanel.add(_abbrechen);
         return rueckgabePanel;
     }
+    
+
 
     /**
      * Erstellt das Hauptpanel mit den drei Anzeigen für die Beträge und
